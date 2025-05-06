@@ -1,0 +1,152 @@
+/* Estilo general del cuerpo */
+body {
+  background: linear-gradient(to right, #ffe0ec, #fbc8d4); /* Fondo suave */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Georgia', cursive; /* Estilo de fuente cursiva */
+  margin: 0;
+  overflow: hidden; /* Evitar barras de desplazamiento */
+}
+
+/* Estilo de la tarjeta */
+.card {
+  background: #f1e1c6; /* Color de fondo tipo pergamino */
+  padding: 2.5em;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  max-width: 650px; /* Haciendo la tarjeta más ancha */
+  position: relative;
+  font-size: 1.1em;
+  line-height: 1.6;
+  border: 2px solid #d4a37a; /* Borde estilo pergamino */
+  background-image: url('https://www.transparenttextures.com/patterns/sandpaper.png'); /* Textura de pergamino */
+  background-size: cover;
+  animation: fadeInCard 2s ease;
+  overflow: hidden; /* Para evitar que el contenido desborde la tarjeta */
+  max-height: 80vh; /* Limitar la altura de la tarjeta */
+  width: 90%;
+  box-sizing: border-box;
+}
+
+/* Título */
+h1 {
+  color: #d6336c;
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+/* Estilo del párrafo */
+p {
+  color: #444;
+  font-size: 1.1em;
+  margin: 1em 0;
+  word-wrap: break-word; /* Para evitar que el texto se desborde */
+  overflow-wrap: break-word; /* Añadir compatibilidad con más navegadores */
+  max-height: 60vh; /* Limitar la altura máxima del contenido */
+  overflow-y: auto; /* Permitir desplazamiento si el contenido es muy largo */
+  text-align: left; /* Alineación de texto a la izquierda */
+}
+
+/* Estilo del botón */
+button {
+  margin-top: 1.5em;
+  padding: 0.8em 1.5em;
+  background-color: #f78fb3;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  position: absolute; /* Para que el botón se mueva dentro de la tarjeta */
+  left: 50%;
+  top: 70%; /* Poner el botón más abajo */
+  transform: translate(-50%, -50%); /* Centra el botón dentro de la tarjeta */
+}
+
+button:hover {
+  background-color: #f06292;
+}
+
+/* Mensaje oculto */
+.hidden {
+  display: none;
+  margin-top: 1.5em;
+  font-size: 1.2em;
+  color: #6c5ce7;
+  animation: fadeIn 1s ease forwards;
+}
+
+/* Animación de aparición de la tarjeta */
+@keyframes fadeInCard {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Animación de aparición del mensaje */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Animación de corazones en los bordes */
+.card::before, .card::after, .card .top, .card .bottom, .card .left, .card .right {
+  content: "💖";
+  position: absolute;
+  font-size: 2em;
+  animation: pulse 1.5s infinite ease-in-out;
+  opacity: 0.8;
+}
+
+.card .top {
+  top: 0;
+  left: 10px;
+  right: 10px;
+  height: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card .bottom {
+  bottom: 0;
+  left: 10px;
+  right: 10px;
+  height: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card .left {
+  top: 10px;
+  left: 0;
+  bottom: 10px;
+  width: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card .right {
+  top: 10px;
+  right: 0;
+  bottom: 10px;
+  width: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card .top span, .card .bottom span, .card .left span, .card .right span {
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* Animación de pulsación de los corazones */
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.8; }
+}
