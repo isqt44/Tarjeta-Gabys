@@ -1,13 +1,21 @@
 /* Estilo general del cuerpo */
 body {
-  background: linear-gradient(to right, #ffe0ec, #fbc8d4);
+  background: linear-gradient(to right, #9b59b6, #8e44ad); /* Fondo morado */
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   font-family: 'Georgia', cursive;
   margin: 0;
-  overflow: auto; /* Ahora permite scroll en toda la página si es necesario */
+  overflow: auto;
+}
+
+/* Título */
+h1 {
+  color: #8e44ad; /* Cambié el color a morado oscuro */
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 0.5em;
 }
 
 /* Estilo de la tarjeta */
@@ -22,57 +30,93 @@ body {
   font-size: 1.1em;
   line-height: 1.6;
   border: 2px solid #d4a37a;
-  background-image: url('https://www.transparenttextures.com/patterns/sandpaper.png');
-  background-size: cover;
   animation: fadeInCard 2s ease;
-  overflow: visible; /* Permitir que el contenido se expanda */
-  max-height: none;  /* Eliminar límite de altura */
+  overflow: hidden;
   width: 90%;
   box-sizing: border-box;
+  height: auto;
 }
 
-/* Título */
-h1 {
-  color: #d6336c;
-  font-size: 2em;
-  font-weight: bold;
-  margin-bottom: 0.5em;
+/* Animación de "palpitación" para el 💖 */
+.heart {
+  display: inline-block;
+  animation: heartbeat 1.5s infinite ease-in-out;
+  font-size: 1.5em;
+  color #d6336c;
 }
 
-/* Estilo del párrafo */
+/* Animación de palpitar */
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Estilo de los demás elementos */
 p {
   color: #444;
   font-size: 1.1em;
   margin: 1em 0;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  max-height: none;       /* Eliminar límite de altura del texto */
-  overflow: visible;      /* Mostrar todo el texto sin scroll */
   text-align: left;
 }
 
-/* Estilo del botón */
 button {
   margin-top: 1.5em;
   padding: 0.8em 1.5em;
-  background-color: #f78fb3;
+  background-color: #8e44ad; /* Color morado */
   color: white;
   border: none;
-  border-radius: 12px;
+  border-radius: 30px;  /* Bordes más redondeados */
   font-size: 1.2em;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, transform 0.2s ease; /* Transición suave */
   position: absolute;
-  left: 50%;
-  top: 70%;
-  transform: translate(-50%, -50%);
+  right: 10px;  /* Movido a la esquina derecha */
+  bottom: 10px; /* Movido a la esquina inferior */
+  transform: translate(0%, 0%);  /* Centrado al moverlo */
+  animation: pulseButton 1.5s ease-in-out infinite; /* Animación de pulso */
 }
 
+/* Animación de "pulso" del botón */
+@keyframes pulseButton {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.1);  /* Aumenta el tamaño un poco */
+  }
+  50% {
+    transform: scale(1);  /* Vuelve al tamaño original */
+  }
+  75% {
+    transform: scale(1.1);  /* Aumenta el tamaño un poco */
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Efecto hover (cuando el cursor pasa sobre el botón) */
 button:hover {
-  background-color: #f06292;
+  background-color: #9b59b6; /* Morado más claro */
+  transform: scale(1.05);  /* Aumenta el tamaño cuando pasa el mouse */
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);  /* Añade un brillo sutil */
 }
 
-/* Mensaje oculto */
 .hidden {
   display: none;
   margin-top: 1.5em;
@@ -81,72 +125,22 @@ button:hover {
   animation: fadeIn 1s ease forwards;
 }
 
-/* Animación de aparición de la tarjeta */
 @keyframes fadeInCard {
   0% { opacity: 0; transform: scale(0.9); }
   100% { opacity: 1; transform: scale(1); }
 }
 
-/* Animación de aparición del mensaje */
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.95); }
   to { opacity: 1; transform: scale(1); }
 }
 
-/* Animación de corazones en los bordes */
-.card::before, .card::after, .card .top, .card .bottom, .card .left, .card .right {
-  content: "💖";
+/* Estilo de las huellas */
+.paw-print {
   position: absolute;
-  font-size: 2em;
-  animation: pulse 1.5s infinite ease-in-out;
-  opacity: 0.8;
-}
-
-.card .top {
-  top: 0;
-  left: 10px;
-  right: 10px;
-  height: 20px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.card .bottom {
-  bottom: 0;
-  left: 10px;
-  right: 10px;
-  height: 20px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.card .left {
-  top: 10px;
-  left: 0;
-  bottom: 10px;
-  width: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.card .right {
-  top: 10px;
-  right: 0;
-  bottom: 10px;
-  width: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.card .top span, .card .bottom span, .card .left span, .card .right span {
-  animation: pulse 1.5s infinite ease-in-out;
-}
-
-/* Animación de pulsación de los corazones */
-@keyframes pulse {
-  0% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.3); opacity: 1; }
-  100% { transform: scale(1); opacity: 0.8; }
+  font-size: 2.5em;
+  opacity: 0.05;
+  color: #d6336c;
+  pointer-events: none;
+  z-index: 1;
 }
