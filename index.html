@@ -87,7 +87,7 @@
       right: 10px;
       bottom: 10px;
       z-index: 2;
-      animation: buttonGlow 2s infinite; /* Mantengo solo el destello */
+      animation: buttonGlow 2s infinite;
     }
 
     @keyframes buttonGlow {
@@ -153,6 +153,28 @@
       50% { transform: scale(1.2); opacity: 0.5; }
       100% { transform: scale(1); opacity: 0.2; }
     }
+
+    /* Animación de dibujo del corazón */
+    .heart-draw {
+      font-size: 2em;
+      color: #d6336c;
+      animation: drawHeart 2s ease-out forwards;
+      display: inline-block;
+      opacity: 0;
+      position: relative;
+      top: 1em;
+    }
+
+    @keyframes drawHeart {
+      0% {
+        transform: scale(0);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
   </style>
 </head>
 <body>
@@ -204,7 +226,7 @@
 
         Gracias por ser tú. Por existir, por dejarme conocerte, por tus luces y tus sombras. Y por permitirme quererte.<br><br>
 
-        Con todo mi cariño, 💌
+        Con todo mi cariño, 💌 <span class="heart-draw">❤️</span>
       </p>
     </div>
 
@@ -220,35 +242,23 @@
     }
 
     function createPawPrintPattern() {
-      const card = document.querySelector('.card');
-      const numRows = 7;
-      const numColumns = 7;
-      const horizontalSpacing = card.offsetWidth / numColumns;
-      const verticalSpacing = card.offsetHeight / numRows;
+      const card = document.querySelector(".card");
+      const pawPrint = document.createElement("div");
+      pawPrint.classList.add("paw-print");
+      pawPrint.textContent = "🐾";
+      card.appendChild(pawPrint);
 
-      const previousPawPrints = card.querySelectorAll('.paw-print');
-      previousPawPrints.forEach(paw => paw.remove());
-
-      for (let i = 0; i < numRows; i++) {
-        for (let j = 0; j < numColumns; j++) {
-          const pawPrint = document.createElement('div');
-          pawPrint.textContent = '🐾';
-          pawPrint.classList.add('paw-print');
-
-          const offsetX = Math.random() * 30 - 15;
-          const offsetY = Math.random() * 30 - 15;
-
-          pawPrint.style.left = `${(j * horizontalSpacing) + offsetX}px`;
-          pawPrint.style.top = `${(i * verticalSpacing) + offsetY}px`;
-
-          card.appendChild(pawPrint);
-        }
-      }
+      setInterval(() => {
+        const newPawPrint = pawPrint.cloneNode(true);
+        newPawPrint.style.left = `${Math.random() * 100}%`;
+        newPawPrint.style.top = `${Math.random() * 100}%`;
+        card.appendChild(newPawPrint);
+        setTimeout(() => {
+          newPawPrint.remove();
+        }, 1000);
+      }, 300);
     }
-
-    createPawPrintPattern();
   </script>
 
 </body>
 </html>
-
