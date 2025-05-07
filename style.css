@@ -77,44 +77,21 @@ p {
 button {
   margin-top: 1.5em;
   padding: 0.8em 1.5em;
-  background-color: #8e44ad; /* Color morado */
+  background-color: #8e44ad; /* Cambié el color del botón a morado */
   color: white;
   border: none;
-  border-radius: 30px;  /* Bordes más redondeados */
+  border-radius: 12px;
   font-size: 1.2em;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease; /* Transición suave */
+  transition: background 0.3s ease;
   position: absolute;
   right: 10px;  /* Movido a la esquina derecha */
   bottom: 10px; /* Movido a la esquina inferior */
   transform: translate(0%, 0%);  /* Centrado al moverlo */
-  animation: pulseButton 1.5s ease-in-out infinite; /* Animación de pulso */
 }
 
-/* Animación de "pulso" del botón */
-@keyframes pulseButton {
-  0% {
-    transform: scale(1);
-  }
-  25% {
-    transform: scale(1.1);  /* Aumenta el tamaño un poco */
-  }
-  50% {
-    transform: scale(1);  /* Vuelve al tamaño original */
-  }
-  75% {
-    transform: scale(1.1);  /* Aumenta el tamaño un poco */
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-/* Efecto hover (cuando el cursor pasa sobre el botón) */
 button:hover {
-  background-color: #9b59b6; /* Morado más claro */
-  transform: scale(1.05);  /* Aumenta el tamaño cuando pasa el mouse */
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);  /* Añade un brillo sutil */
+  background-color: #9b59b6; /* Cambié el color del hover a un tono más claro de morado */
 }
 
 .hidden {
@@ -144,4 +121,3 @@ button:hover {
   pointer-events: none;
   z-index: 1;
 }
-
