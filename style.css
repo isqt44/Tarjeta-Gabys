@@ -1,32 +1,32 @@
 /* Estilo general del cuerpo */
 body {
-  background: linear-gradient(to right, #ffe0ec, #fbc8d4); /* Fondo suave */
+  background: linear-gradient(to right, #ffe0ec, #fbc8d4);
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  font-family: 'Georgia', cursive; /* Estilo de fuente cursiva */
+  min-height: 100vh;
+  font-family: 'Georgia', cursive;
   margin: 0;
-  overflow: hidden; /* Evitar barras de desplazamiento */
+  overflow: auto; /* Ahora permite scroll en toda la página si es necesario */
 }
 
 /* Estilo de la tarjeta */
 .card {
-  background: #f1e1c6; /* Color de fondo tipo pergamino */
+  background: #f1e1c6;
   padding: 2.5em;
   border-radius: 15px;
   text-align: center;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  max-width: 650px; /* Haciendo la tarjeta más ancha */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  max-width: 650px;
   position: relative;
   font-size: 1.1em;
   line-height: 1.6;
-  border: 2px solid #d4a37a; /* Borde estilo pergamino */
-  background-image: url('https://www.transparenttextures.com/patterns/sandpaper.png'); /* Textura de pergamino */
+  border: 2px solid #d4a37a;
+  background-image: url('https://www.transparenttextures.com/patterns/sandpaper.png');
   background-size: cover;
   animation: fadeInCard 2s ease;
-  overflow: hidden; /* Para evitar que el contenido desborde la tarjeta */
-  max-height: 80vh; /* Limitar la altura de la tarjeta */
+  overflow: visible; /* Permitir que el contenido se expanda */
+  max-height: none;  /* Eliminar límite de altura */
   width: 90%;
   box-sizing: border-box;
 }
@@ -44,11 +44,11 @@ p {
   color: #444;
   font-size: 1.1em;
   margin: 1em 0;
-  word-wrap: break-word; /* Para evitar que el texto se desborde */
-  overflow-wrap: break-word; /* Añadir compatibilidad con más navegadores */
-  max-height: 60vh; /* Limitar la altura máxima del contenido */
-  overflow-y: auto; /* Permitir desplazamiento si el contenido es muy largo */
-  text-align: left; /* Alineación de texto a la izquierda */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-height: none;       /* Eliminar límite de altura del texto */
+  overflow: visible;      /* Mostrar todo el texto sin scroll */
+  text-align: left;
 }
 
 /* Estilo del botón */
@@ -62,10 +62,10 @@ button {
   font-size: 1.2em;
   cursor: pointer;
   transition: background 0.3s ease;
-  position: absolute; /* Para que el botón se mueva dentro de la tarjeta */
+  position: absolute;
   left: 50%;
-  top: 70%; /* Poner el botón más abajo */
-  transform: translate(-50%, -50%); /* Centra el botón dentro de la tarjeta */
+  top: 70%;
+  transform: translate(-50%, -50%);
 }
 
 button:hover {
