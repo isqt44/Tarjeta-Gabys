@@ -42,7 +42,7 @@ h1 {
   display: inline-block;
   animation: heartbeat 1.5s infinite ease-in-out;
   font-size: 1.5em;
-  color #d6336c;
+  color: #d6336c;
 }
 
 /* Animación de palpitar */
@@ -144,3 +144,4 @@ button:hover {
   pointer-events: none;
   z-index: 1;
 }
+
