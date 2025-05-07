@@ -4,28 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tarjeta Especial</title>
+
+  <!-- Fuente Another Shabby desde Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Another+Shabby&display=swap" rel="stylesheet">
+
   <style>
-    /* Estilo general del cuerpo */
     body {
-      background: linear-gradient(to right, #9b59b6, #8e44ad); /* Fondo morado */
+      background: linear-gradient(to right, #9b59b6, #8e44ad);
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      font-family: 'Georgia', cursive;
+      font-family: 'Another Shabby', cursive;
       margin: 0;
       overflow: auto;
     }
 
-    /* Título */
     h1 {
-      color: #8e44ad; /* Cambié el color a morado oscuro */
+      color: #8e44ad;
       font-size: 2em;
       font-weight: bold;
       margin-bottom: 0.5em;
     }
 
-    /* Estilo de la tarjeta */
     .card {
       background: #f1e1c6;
       padding: 2.5em;
@@ -44,7 +45,6 @@
       height: auto;
     }
 
-    /* Animación de "palpitación" para el 💖 */
     .heart {
       display: inline-block;
       animation: heartbeat 1.5s infinite ease-in-out;
@@ -52,26 +52,14 @@
       color: #d6336c;
     }
 
-    /* Animación de palpitar */
     @keyframes heartbeat {
-      0% {
-        transform: scale(1);
-      }
-      25% {
-        transform: scale(1.2);
-      }
-      50% {
-        transform: scale(1);
-      }
-      75% {
-        transform: scale(1.2);
-      }
-      100% {
-        transform: scale(1);
-      }
+      0% { transform: scale(1); }
+      25% { transform: scale(1.2); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.2); }
+      100% { transform: scale(1); }
     }
 
-    /* Estilo de los demás elementos */
     p {
       color: #444;
       font-size: 1.1em;
@@ -84,7 +72,7 @@
     button {
       margin-top: 1.5em;
       padding: 0.8em 1.5em;
-      background-color: #8e44ad; /* Cambié el color del botón a morado */
+      background-color: #8e44ad;
       color: white;
       border: none;
       border-radius: 12px;
@@ -92,13 +80,13 @@
       cursor: pointer;
       transition: background 0.3s ease;
       position: absolute;
-      right: 10px;  /* Movido a la esquina derecha */
-      bottom: 10px; /* Movido a la esquina inferior */
-      transform: translate(0%, 0%);  /* Centrado al moverlo */
+      right: 10px;
+      bottom: 10px;
+      transform: translate(0%, 0%);
     }
 
     button:hover {
-      background-color: #9b59b6; /* Cambié el color del hover a un tono más claro de morado */
+      background-color: #9b59b6;
     }
 
     .hidden {
@@ -119,7 +107,6 @@
       to { opacity: 1; transform: scale(1); }
     }
 
-    /* Estilo de las huellas */
     .paw-print {
       position: absolute;
       font-size: 2.5em;
@@ -141,10 +128,8 @@
     quiero que sepas algo muy claro:
   </p>
   
-  <!-- Botón para mostrar el mensaje largo -->
   <button id="clickButton" onclick="revealMessage()">Haz clic aquí</button>
   
-  <!-- Mensaje largo oculto -->
   <div id="surprise" class="hidden">
     <p style="text-align: left; font-size: 1em; margin-top: 1em;">
       Me enamoré de ti en momentos que ni siquiera te diste cuenta. En miradas rápidas, en esa forma tuya de sonreír como si todo estuviera bien, incluso cuando tal vez no lo estaba.<br><br>
@@ -165,55 +150,40 @@
 </div>
 
 <script>
-  // Función para mostrar el mensaje largo y ocultar el mensaje inicial
   function revealMessage() {
-    // Ocultar el texto principal
     document.getElementById('mainText').style.display = 'none';
-    
-    // Mostrar el mensaje largo
     document.getElementById('surprise').classList.remove('hidden');
-    
-    // Opcionalmente, también podrías ocultar el botón después del clic
     document.getElementById('clickButton').style.display = 'none';
-
-    // Crear las huellitas con patrón repetido
     createPawPrintPattern();
   }
 
-  // Función para crear un patrón de huellitas distribuidas por toda la carta
   function createPawPrintPattern() {
     const card = document.querySelector('.card');
-    const numRows = 7; // Reducimos el número de filas de huellas
-    const numColumns = 7; // Reducimos el número de columnas de huellas
+    const numRows = 7;
+    const numColumns = 7;
     const horizontalSpacing = card.offsetWidth / numColumns;
     const verticalSpacing = card.offsetHeight / numRows;
 
-    // Eliminar las huellas previas
     const previousPawPrints = card.querySelectorAll('.paw-print');
     previousPawPrints.forEach(paw => paw.remove());
 
-    // Crear huellitas distribuidas de manera más equilibrada
     for (let i = 0; i < numRows; i++) {
       for (let j = 0; j < numColumns; j++) {
         const pawPrint = document.createElement('div');
         pawPrint.textContent = '🐾';
         pawPrint.classList.add('paw-print');
 
-        // Establecer la posición de cada huella de manera más dispersa
-        const offsetX = Math.random() * 30 - 15; // Añadir desplazamiento aleatorio horizontal
-        const offsetY = Math.random() * 30 - 15; // Añadir desplazamiento aleatorio vertical
+        const offsetX = Math.random() * 30 - 15;
+        const offsetY = Math.random() * 30 - 15;
 
-        // Posicionar las huellas de forma diagonal
         pawPrint.style.left = `${(j * horizontalSpacing) + offsetX}px`;
         pawPrint.style.top = `${(i * verticalSpacing) + offsetY}px`;
 
-        // Añadir la huella al contenedor
         card.appendChild(pawPrint);
       }
     }
   }
 
-  // Llamamos a la función para crear las huellitas al cargar la página
   createPawPrintPattern();
 </script>
 
