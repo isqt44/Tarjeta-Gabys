@@ -10,7 +10,7 @@
 
   <style>
     body {
-      background: linear-gradient(to right, #9b59b6, #8e44ad);
+      background: linear-gradient(to right, rgba(155, 89, 182, 0.7), rgba(142, 68, 173, 0.7));
       display: flex;
       justify-content: center;
       align-items: center;
@@ -18,12 +18,13 @@
       font-family: 'Another Shabby', cursive;
       margin: 0;
       overflow: auto;
+      position: relative;
     }
 
     h1 {
       color: #8e44ad;
       font-size: 2em;
-      font-weight: bold;
+      font-weight: 600;
       margin-bottom: 0.5em;
     }
 
@@ -42,7 +43,12 @@
       overflow: hidden;
       width: 90%;
       box-sizing: border-box;
-      height: auto;
+      font-weight: 600;
+    }
+
+    @keyframes fadeInCard {
+      0% { opacity: 0; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
     }
 
     .heart {
@@ -53,20 +59,17 @@
     }
 
     @keyframes heartbeat {
-      0% { transform: scale(1); }
-      25% { transform: scale(1.2); }
+      0%,100% { transform: scale(1); }
+      25%,75% { transform: scale(1.2); }
       50% { transform: scale(1); }
-      75% { transform: scale(1.2); }
-      100% { transform: scale(1); }
     }
 
     p {
       color: #444;
       font-size: 1.1em;
       margin: 1em 0;
-      word-wrap: break-word;
-      overflow-wrap: break-word;
       text-align: left;
+      font-weight: 600;
     }
 
     button {
@@ -77,12 +80,20 @@
       border: none;
       border-radius: 12px;
       font-size: 1.2em;
+      font-family: 'Another Shabby', cursive;
+      font-weight: 600;
       cursor: pointer;
-      transition: background 0.3s ease;
       position: absolute;
       right: 10px;
       bottom: 10px;
-      transform: translate(0%, 0%);
+      z-index: 2;
+      animation: buttonGlow 2s infinite; /* Mantengo solo el destello */
+    }
+
+    @keyframes buttonGlow {
+      0% { box-shadow: 0 0 0 0 rgba(128,0,128,0.8); }
+      50% { box-shadow: 0 0 20px 10px rgba(128,0,128,0.8); }
+      100% { box-shadow: 0 0 0 0 rgba(128,0,128,0.8); }
     }
 
     button:hover {
@@ -95,11 +106,7 @@
       font-size: 1.2em;
       color: #6c5ce7;
       animation: fadeIn 1s ease forwards;
-    }
-
-    @keyframes fadeInCard {
-      0% { opacity: 0; transform: scale(0.9); }
-      100% { opacity: 1; transform: scale(1); }
+      font-weight: 600;
     }
 
     @keyframes fadeIn {
@@ -115,77 +122,125 @@
       pointer-events: none;
       z-index: 1;
     }
+
+    /* Corazones de fondo */
+    .heart-pattern {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .heart-pattern div {
+      position: absolute;
+      font-size: 3em;
+      color: #d6336c;
+      opacity: 0.2;
+      animation: moveHearts 10s infinite, pulse 1.5s infinite ease-in-out;
+    }
+
+    @keyframes moveHearts {
+      0% { transform: translate(0,0); }
+      50% { transform: translate(100px,100px); }
+      100% { transform: translate(0,0); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.2; }
+      50% { transform: scale(1.2); opacity: 0.5; }
+      100% { transform: scale(1); opacity: 0.2; }
+    }
   </style>
 </head>
 <body>
 
-<div class="card">
-  <h1>Para ti, mi Gabys <span class="heart">💖</span></h1>
-  
-  <p id="mainText">
-    Me enamoré de tus ojos lindos y tu sonrisa...<br>
-    Y aunque a veces no lo demuestre con la misma intensidad,<br>
-    quiero que sepas algo muy claro:
-  </p>
-  
-  <button id="clickButton" onclick="revealMessage()">Haz clic aquí</button>
-  
-  <div id="surprise" class="hidden">
-    <p style="text-align: left; font-size: 1em; margin-top: 1em;">
-      Me enamoré de ti en momentos que ni siquiera te diste cuenta. En miradas rápidas, en esa forma tuya de sonreír como si todo estuviera bien, incluso cuando tal vez no lo estaba.<br><br>
-
-      Me enamoré de tus ojos lindos, que tienen una luz que no se apaga nunca, y de tu sonrisa, que es capaz de calmar tormentas dentro de mí.<br><br>
-
-      A veces siento que no soy el mejor para demostrar lo que siento, que quizás no siempre tengo la intensidad emocional que mereces o que esperas. Pero por favor, nunca confundas eso con desinterés. Te amo con todo lo que soy, aunque a veces ese amor no se vea de la forma más tradicional.<br><br>
-
-      Intento demostrarlo de formas distintas, con cosas pequeñas, con gestos que tal vez parecen simples pero que nacen desde lo más profundo. Como esta tarjeta, que no es perfecta ni espectacular, pero que está hecha pensando en ti, con la intención más bonita que tengo: hacerte sentir querida.<br><br>
-
-      Gracias por ser tú. Por existir, por dejarme conocerte, por tus luces y tus sombras. Y por permitirme quererte.<br><br>
-
-      Con todo mi cariño, 💌
-    </p>
+  <div class="heart-pattern">
+    <!-- Corazones flotantes -->
+    <div style="top:5%; left:5%;">❤️</div>
+    <div style="top:10%; left:20%;">❤️</div>
+    <div style="top:15%; left:35%;">❤️</div>
+    <div style="top:20%; left:50%;">❤️</div>
+    <div style="top:25%; left:65%;">❤️</div>
+    <div style="top:30%; left:80%;">❤️</div>
+    <div style="top:35%; left:10%;">❤️</div>
+    <div style="top:40%; left:25%;">❤️</div>
+    <div style="top:45%; left:40%;">❤️</div>
+    <div style="top:50%; left:55%;">❤️</div>
+    <div style="top:55%; left:70%;">❤️</div>
+    <div style="top:60%; left:85%;">❤️</div>
+    <!-- ... añade más si deseas -->
   </div>
 
-  <div class="hearts"></div>
-</div>
+  <div class="card">
+    <h1>Para ti, mi Gabys <span class="heart">💖</span></h1>
+    
+    <p id="mainText">
+      Me enamoré de tus ojos lindos y tu sonrisa...<br>
+      Y aunque a veces no lo demuestre con la misma intensidad,<br>
+      quiero que sepas algo muy claro:
+    </p>
+    
+    <button id="clickButton" onclick="revealMessage()">Haz clic aquí</button>
+    
+    <div id="surprise" class="hidden">
+      <p style="text-align: left; font-size: 1em; margin-top: 1em;">
+        Me enamoré de ti en momentos que ni siquiera te diste cuenta. En miradas rápidas, en esa forma tuya de sonreír como si todo estuviera bien, incluso cuando tal vez no lo estaba.<br><br>
 
-<script>
-  function revealMessage() {
-    document.getElementById('mainText').style.display = 'none';
-    document.getElementById('surprise').classList.remove('hidden');
-    document.getElementById('clickButton').style.display = 'none';
-    createPawPrintPattern();
-  }
+        Me enamoré de tus ojos lindos, que tienen una luz que no se apaga nunca, y de tu sonrisa, que es capaz de calmar tormentas dentro de mí.<br><br>
 
-  function createPawPrintPattern() {
-    const card = document.querySelector('.card');
-    const numRows = 7;
-    const numColumns = 7;
-    const horizontalSpacing = card.offsetWidth / numColumns;
-    const verticalSpacing = card.offsetHeight / numRows;
+        A veces siento que no soy el mejor para demostrar lo que siento, que quizás no siempre tengo la intensidad emocional que mereces o que esperas. Pero por favor, nunca confundas eso con desinterés. Te amo con todo lo que soy, aunque a veces ese amor no se vea de la forma más tradicional.<br><br>
 
-    const previousPawPrints = card.querySelectorAll('.paw-print');
-    previousPawPrints.forEach(paw => paw.remove());
+        Intento demostrarlo de formas distintas, con cosas pequeñas, con gestos que tal vez parecen simples pero que nacen desde lo más profundo. Como esta tarjeta, que no es perfecta ni espectacular, pero que está hecha pensando en ti, con la intención más bonita que tengo: hacerte sentir querida.<br><br>
 
-    for (let i = 0; i < numRows; i++) {
-      for (let j = 0; j < numColumns; j++) {
-        const pawPrint = document.createElement('div');
-        pawPrint.textContent = '🐾';
-        pawPrint.classList.add('paw-print');
+        Gracias por ser tú. Por existir, por dejarme conocerte, por tus luces y tus sombras. Y por permitirme quererte.<br><br>
 
-        const offsetX = Math.random() * 30 - 15;
-        const offsetY = Math.random() * 30 - 15;
+        Con todo mi cariño, 💌
+      </p>
+    </div>
 
-        pawPrint.style.left = `${(j * horizontalSpacing) + offsetX}px`;
-        pawPrint.style.top = `${(i * verticalSpacing) + offsetY}px`;
+    <div class="hearts"></div>
+  </div>
 
-        card.appendChild(pawPrint);
+  <script>
+    function revealMessage() {
+      document.getElementById('mainText').style.display = 'none';
+      document.getElementById('surprise').classList.remove('hidden');
+      document.getElementById('clickButton').style.display = 'none';
+      createPawPrintPattern();
+    }
+
+    function createPawPrintPattern() {
+      const card = document.querySelector('.card');
+      const numRows = 7;
+      const numColumns = 7;
+      const horizontalSpacing = card.offsetWidth / numColumns;
+      const verticalSpacing = card.offsetHeight / numRows;
+
+      const previousPawPrints = card.querySelectorAll('.paw-print');
+      previousPawPrints.forEach(paw => paw.remove());
+
+      for (let i = 0; i < numRows; i++) {
+        for (let j = 0; j < numColumns; j++) {
+          const pawPrint = document.createElement('div');
+          pawPrint.textContent = '🐾';
+          pawPrint.classList.add('paw-print');
+
+          const offsetX = Math.random() * 30 - 15;
+          const offsetY = Math.random() * 30 - 15;
+
+          pawPrint.style.left = `${(j * horizontalSpacing) + offsetX}px`;
+          pawPrint.style.top = `${(i * verticalSpacing) + offsetY}px`;
+
+          card.appendChild(pawPrint);
+        }
       }
     }
-  }
 
-  createPawPrintPattern();
-</script>
+    createPawPrintPattern();
+  </script>
 
 </body>
 </html>
