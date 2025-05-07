@@ -4,7 +4,131 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tarjeta Especial</title>
-  <link rel="stylesheet" href="styles.css"> <!-- Enlace al archivo CSS -->
+  <style>
+    /* Estilo general del cuerpo */
+    body {
+      background: linear-gradient(to right, #9b59b6, #8e44ad); /* Fondo morado */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: 'Georgia', cursive;
+      margin: 0;
+      overflow: auto;
+    }
+
+    /* Título */
+    h1 {
+      color: #8e44ad; /* Cambié el color a morado oscuro */
+      font-size: 2em;
+      font-weight: bold;
+      margin-bottom: 0.5em;
+    }
+
+    /* Estilo de la tarjeta */
+    .card {
+      background: #f1e1c6;
+      padding: 2.5em;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+      max-width: 650px;
+      position: relative;
+      font-size: 1.1em;
+      line-height: 1.6;
+      border: 2px solid #d4a37a;
+      animation: fadeInCard 2s ease;
+      overflow: hidden;
+      width: 90%;
+      box-sizing: border-box;
+      height: auto;
+    }
+
+    /* Animación de "palpitación" para el 💖 */
+    .heart {
+      display: inline-block;
+      animation: heartbeat 1.5s infinite ease-in-out;
+      font-size: 1.5em;
+      color: #d6336c;
+    }
+
+    /* Animación de palpitar */
+    @keyframes heartbeat {
+      0% {
+        transform: scale(1);
+      }
+      25% {
+        transform: scale(1.2);
+      }
+      50% {
+        transform: scale(1);
+      }
+      75% {
+        transform: scale(1.2);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    /* Estilo de los demás elementos */
+    p {
+      color: #444;
+      font-size: 1.1em;
+      margin: 1em 0;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      text-align: left;
+    }
+
+    button {
+      margin-top: 1.5em;
+      padding: 0.8em 1.5em;
+      background-color: #8e44ad; /* Cambié el color del botón a morado */
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      position: absolute;
+      right: 10px;  /* Movido a la esquina derecha */
+      bottom: 10px; /* Movido a la esquina inferior */
+      transform: translate(0%, 0%);  /* Centrado al moverlo */
+    }
+
+    button:hover {
+      background-color: #9b59b6; /* Cambié el color del hover a un tono más claro de morado */
+    }
+
+    .hidden {
+      display: none;
+      margin-top: 1.5em;
+      font-size: 1.2em;
+      color: #6c5ce7;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeInCard {
+      0% { opacity: 0; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Estilo de las huellas */
+    .paw-print {
+      position: absolute;
+      font-size: 2.5em;
+      opacity: 0.05;
+      color: #d6336c;
+      pointer-events: none;
+      z-index: 1;
+    }
+  </style>
 </head>
 <body>
 
@@ -40,6 +164,58 @@
   <div class="hearts"></div>
 </div>
 
-<script src="script.js"></script> <!-- Enlace al archivo JavaScript -->
+<script>
+  // Función para mostrar el mensaje largo y ocultar el mensaje inicial
+  function revealMessage() {
+    // Ocultar el texto principal
+    document.getElementById('mainText').style.display = 'none';
+    
+    // Mostrar el mensaje largo
+    document.getElementById('surprise').classList.remove('hidden');
+    
+    // Opcionalmente, también podrías ocultar el botón después del clic
+    document.getElementById('clickButton').style.display = 'none';
+
+    // Crear las huellitas con patrón repetido
+    createPawPrintPattern();
+  }
+
+  // Función para crear un patrón de huellitas distribuidas por toda la carta
+  function createPawPrintPattern() {
+    const card = document.querySelector('.card');
+    const numRows = 7; // Reducimos el número de filas de huellas
+    const numColumns = 7; // Reducimos el número de columnas de huellas
+    const horizontalSpacing = card.offsetWidth / numColumns;
+    const verticalSpacing = card.offsetHeight / numRows;
+
+    // Eliminar las huellas previas
+    const previousPawPrints = card.querySelectorAll('.paw-print');
+    previousPawPrints.forEach(paw => paw.remove());
+
+    // Crear huellitas distribuidas de manera más equilibrada
+    for (let i = 0; i < numRows; i++) {
+      for (let j = 0; j < numColumns; j++) {
+        const pawPrint = document.createElement('div');
+        pawPrint.textContent = '🐾';
+        pawPrint.classList.add('paw-print');
+
+        // Establecer la posición de cada huella de manera más dispersa
+        const offsetX = Math.random() * 30 - 15; // Añadir desplazamiento aleatorio horizontal
+        const offsetY = Math.random() * 30 - 15; // Añadir desplazamiento aleatorio vertical
+
+        // Posicionar las huellas de forma diagonal
+        pawPrint.style.left = `${(j * horizontalSpacing) + offsetX}px`;
+        pawPrint.style.top = `${(i * verticalSpacing) + offsetY}px`;
+
+        // Añadir la huella al contenedor
+        card.appendChild(pawPrint);
+      }
+    }
+  }
+
+  // Llamamos a la función para crear las huellitas al cargar la página
+  createPawPrintPattern();
+</script>
+
 </body>
 </html>
